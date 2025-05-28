@@ -22,7 +22,7 @@ const MovieDetails = async ({
   }
 
   const response = await fetch(
-    `${URL}/tv/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
+    `${URL}/tv/${id}?api_key=${process.env.TMDB_API_KEY}`
   );
   const { name, overview, backdrop_path, poster_path, genres }: Movie =
     await response.json();

@@ -9,12 +9,24 @@ type MovieResponse = {
 };
 
 const Home = async () => {
-  const response = await fetch(
-    `${URL}/trending/tv/week?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-  );
-  const { results }: MovieResponse = await response.json();
+  try {
+    const response = await fetch(
+      `${URL}/trending/tv/week?api_key=${process.env.TMDB_API_KEY}`
+    );
 
-  return <Search movies={results} />;
+    if (!response.ok) {
+      throw new Error(`TMDB API error: ${response.status}`);
+    }
+
+    const { results }: MovieResponse = await response.json();
+
+    return <Search movies={results} />;
+  } catch (err) {
+    console.error("Failed to fetch movies:", err);
+    return (
+      <p className="text-center p-8 text-red-500">Failed to load movies.</p>
+    );
+  }
 };
 
 export default Home;
