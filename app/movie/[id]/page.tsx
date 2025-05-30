@@ -18,7 +18,8 @@ const MovieDetails = async ({
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect("/");
+    // toast("This route is protected. Kindly login!");
+    redirect("/?error=unauthorized");
   }
 
   const response = await fetch(
@@ -34,17 +35,16 @@ const MovieDetails = async ({
         <span>Back</span>
       </Link>
       <div className="flex flex-col sm:flex-row gap-4 w-full">
-        <div className="w-full sm:w-2/4 relative min-h-42">
+        <div className="hidden sm:flex w-full sm:w-2/4 relative min-h-42">
           <Image
             src={`${IMAGE_BASE_URL}/${poster_path}`}
             alt="movie_img"
             fill
-            objectFit="cover"
-            objectPosition="center"
+            className="object-cover object-center rounded-lg"
           />
         </div>
         <div className="w-full sm:w-2/4 flex flex-col gap-2">
-          <div className="hidden sm:flex w-full relative min-h-42">
+          <div className="w-full relative min-h-42">
             <Image
               className="rounded-lg"
               src={`${IMAGE_BASE_URL}/${backdrop_path}`}

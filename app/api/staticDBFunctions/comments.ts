@@ -7,8 +7,6 @@ export const getComments = async (movieId: number) => {
     }, 2000);
   });
 
-  console.log(typeof movieId);
-
   const movieComments = comments.filter(
     (comment) => comment.movieId === +movieId
   );
