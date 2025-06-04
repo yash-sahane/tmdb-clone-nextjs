@@ -35,7 +35,7 @@ const AddComment = ({ movieId }: { movieId: number }) => {
           </button>
         </div>
         {state?.errors && (
-          <p className="text-sm text-red-500">{state?.errors.desc}</p>
+          <p className="text-sm text-red-500">{state?.errors.comment}</p>
         )}
       </form>
     </div>

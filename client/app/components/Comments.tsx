@@ -1,9 +1,20 @@
 import React from "react";
-import { getComments } from "../api/staticDBFunctions/comments";
+// import { getComments } from "../api/staticDBFunctions/comments";
 import CommentCard from "./CommentCard";
+import { Comment } from "../types";
 
 const Comments = async ({ movieId }: { movieId: number }) => {
-  const comments = await getComments(movieId);
+  let comments: Comment[] = [];
+  try {
+    const response = await fetch(
+      `${process.env.SERVER_URI}/api/comments/${movieId}`
+    );
+    const { data } = await response.json();
+    comments = data;
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
 
   return (
     <>

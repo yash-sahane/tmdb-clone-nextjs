@@ -9,7 +9,8 @@ export type Movie = {
 
 export type Comment = {
   id: number;
-  desc: string;
+  comment: string;
   movieId: number;
-  userId: number;
+  userId?: number;
+  username: string;
 };

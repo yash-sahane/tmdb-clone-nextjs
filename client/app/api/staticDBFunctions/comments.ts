@@ -14,18 +14,18 @@ export const getComments = async (movieId: number) => {
   return movieComments;
 };
 
-export const addComment = async (movieId: number, desc: string) => {
+export const addComment = async (movieId: number, comment: string) => {
   await new Promise((resolve) => {
     setTimeout(() => {
       resolve("");
     }, 2000);
   });
 
-  console.log(desc, movieId);
+  console.log(comment, movieId);
 
   comments.push({
     id: comments.length ? comments[comments.length - 1].id + 1 : 1,
-    desc,
+    comment,
     movieId,
     userId: comments.length ? comments[comments.length - 1].id + 1 : 1,
   });

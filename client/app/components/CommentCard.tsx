@@ -9,8 +9,8 @@ const CommentCard = ({ comment }: { comment: Comment }) => {
         <User />
       </div>
       <div className="flex flex-col gap-1 p-1 px-2 bg-gray-300 rounded-sm w-full">
-        <p className="font-semibold">Domniic</p>
-        <p>{comment.desc}</p>
+        <p className="font-semibold">{comment.username}</p>
+        <p>{comment.comment}</p>
       </div>
     </div>
   );

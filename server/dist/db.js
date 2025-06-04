@@ -15,8 +15,9 @@ export const initDB = async () => {
         CREATE TABLE IF NOT EXISTS Comments (
           id SERIAL PRIMARY KEY,
           comment TEXT NOT NULL,
-          user_name TEXT NOT NULL,
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+          username TEXT NOT NULL,
+          movieId INT NOT NULL,
+          createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )`);
         console.log("Comments table created successfully");
     }
