@@ -1,11 +1,14 @@
 "use client";
 
-import React, { useActionState } from "react";
+import React, { useActionState, useEffect } from "react";
 import { commentSubmitHandler, FormState } from "../actions/comment";
 import { Send } from "lucide-react";
+import toast from "react-hot-toast";
 
 const initialState: FormState = {
   errors: {},
+  message: "",
+  success: false,
 };
 
 const AddComment = ({ movieId }: { movieId: number }) => {
@@ -13,6 +16,12 @@ const AddComment = ({ movieId }: { movieId: number }) => {
     commentSubmitHandler,
     initialState
   );
+
+  useEffect(() => {
+    if (state.success && state.message) {
+      toast.success(state.message);
+    }
+  }, [state]);
 
   return (
     <div className="">

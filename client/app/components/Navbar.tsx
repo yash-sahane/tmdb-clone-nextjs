@@ -7,6 +7,7 @@ import Modal from "./Modal";
 const Navbar = () => {
   const { data } = useSession();
   const user = data?.user;
+
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
   return (

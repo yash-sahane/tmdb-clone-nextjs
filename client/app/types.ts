@@ -14,3 +14,9 @@ export type Comment = {
   userId?: number;
   username: string;
 };
+
+export type ResponseType = {
+  success: boolean;
+  message?: string;
+  data?: any;
+};

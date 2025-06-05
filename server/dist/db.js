@@ -9,8 +9,7 @@ const pool = new Pool({
     port: Number(process.env.DB_PORT),
 });
 export const initDB = async () => {
-    console.log(process.env.PORT);
-    try {
+    const createCommentsTable = async () => {
         await pool.query(`
         CREATE TABLE IF NOT EXISTS Comments (
           id SERIAL PRIMARY KEY,
@@ -20,6 +19,20 @@ export const initDB = async () => {
           createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )`);
         console.log("Comments table created successfully");
+    };
+    const createUsersTable = async () => {
+        await pool.query(`
+        CREATE TABLE IF NOT EXISTS Users (
+          id SERIAL PRIMARY KEY,
+          email VARCHAR(255) NOT NULL UNIQUE,
+          name VARCHAR(255),
+          createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )`);
+        console.log("Users table created successfully");
+    };
+    try {
+        await createCommentsTable();
+        await createUsersTable();
     }
     catch (err) {
         console.log("Error creating table : ", err);
