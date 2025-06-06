@@ -16,10 +16,20 @@ const authOptions: AuthOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async jwt({ token, user, account }) {
-      if (account) {
-        token.accessToken = account.access_token;
+    async jwt({ user, token, account }) {
+      if (user) {
+        try {
+          await fetch(`${process.env.SERVER_URI}/api/users/add`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: user.name, email: user.email }),
+          });
+        } catch (err) {
+          console.log(err);
+        }
       }
+
+      token.accessToken = account?.access_token;
       return token;
     },
     async session({ session, token }) {

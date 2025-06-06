@@ -1,9 +1,10 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import pool from "../db.js";
 
 export const getComments = async (
   req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   try {
     const { id } = req.params;
@@ -19,12 +20,14 @@ export const getComments = async (
     });
   } catch (err) {
     console.log(err);
+    next(err);
   }
 };
 
 export const addComment = async (
   req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   try {
     const { comment, movieId, username } = req.body;
@@ -49,5 +52,6 @@ export const addComment = async (
     });
   } catch (err) {
     console.log(err);
+    next(err);
   }
 };
