@@ -21,8 +21,6 @@ export const addComment = async (movieId: number, comment: string) => {
     }, 2000);
   });
 
-  console.log(comment, movieId);
-
   comments.push({
     id: comments.length ? comments[comments.length - 1].id + 1 : 1,
     comment,

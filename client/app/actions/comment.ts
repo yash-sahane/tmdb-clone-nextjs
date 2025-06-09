@@ -38,6 +38,10 @@ export const commentSubmitHandler = async (
 
   const session = await getServerSession(authOptions);
   const username = session?.user?.name || session?.user?.email;
+  const token = session?.accessToken;
+
+  console.log("token is : ", token);
+
   let message: string = "";
   let success: boolean = false;
 
@@ -46,6 +50,7 @@ export const commentSubmitHandler = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         comment: comment.trim(),

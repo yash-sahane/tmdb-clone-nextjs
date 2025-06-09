@@ -8,7 +8,7 @@ export const addUser = async (
   next: NextFunction
 ) => {
   try {
-    const { name, email } = req.body();
+    const { name, email } = await req.body;
 
     if (!name || !email) {
       next(new AppError(400, "Please provide appropriate details"));

@@ -2,7 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import { initDB } from "./db.js";
 import commentsRouter from "./routes/comment.route.js";
-import userRouter from "./routes/comment.route.js";
+import userRouter from "./routes/user.route.js";
 import { errorHandler } from "./middleware/error.js";
 
 const app = express();

@@ -1,6 +1,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import { AuthOptions } from "next-auth";
+import jwt from "jsonwebtoken";
 
 const authOptions: AuthOptions = {
   // Configure one or more authentication providers
@@ -14,9 +15,15 @@ const authOptions: AuthOptions = {
       clientSecret: process.env.GOOGLE_SECRET!,
     }),
   ],
+
+  session: {
+    strategy: "jwt",
+  },
+
   secret: process.env.NEXTAUTH_SECRET,
+
   callbacks: {
-    async jwt({ user, token, account }) {
+    async jwt({ user, token }) {
       if (user) {
         try {
           await fetch(`${process.env.SERVER_URI}/api/users/add`, {
@@ -29,11 +36,13 @@ const authOptions: AuthOptions = {
         }
       }
 
-      token.accessToken = account?.access_token;
       return token;
     },
     async session({ session, token }) {
-      session.accessToken = token.accessToken;
+      session.accessToken = jwt.sign(
+        token,
+        process.env.NEXTAUTH_SECRET || "hello_world"
+      );
       return session;
     },
   },
