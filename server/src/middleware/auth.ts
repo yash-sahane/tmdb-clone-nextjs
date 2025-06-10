@@ -26,9 +26,13 @@ const isAuthenticated = async (
           "SELECT * FROM users WHERE email = $1",
           [email]
         );
+
         if (rows.length) {
           req.user = rows[0];
+        } else {
+          return next(new AppError(400, "User not found"));
         }
+        next();
       } else {
         return next(new AppError(400, "Something went wrong"));
       }

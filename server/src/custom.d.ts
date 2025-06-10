@@ -1,7 +1,11 @@
-import { User } from "../types.ts";
+import { User } from "./types.ts";
 
-declare namespace Express {
-  export interface Request {
-    user?: User;
+export {}; // Make this a module
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: User;
+    }
   }
 }
